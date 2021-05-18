@@ -1,0 +1,11 @@
+.li_style{
+    list-style: none;
+    display: flexbox;
+    
+    margin: 20px;
+}
+
+.image_style{
+width: 320px;
+
+}
