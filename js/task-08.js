@@ -17,34 +17,31 @@ const boxesRef = document.querySelector('#boxes');
 const numberRef = document.querySelector('#controls [type="number"]');
 const renderBtnRef = document.querySelector('#controls [data-action="render"]');
 const destroyBtnRef = document.querySelector('#controls [data-action="destroy"]');
-let amount = [];
-
+let amount = 0;
+let boxesArray = [];
 
 numberRef.addEventListener('input', (event) => {
-    amount = new Array(Number(event.currentTarget.value)).fill('div');
-    return amount}); 
+    amount = event.currentTarget.value})
 
-const createBoxesArr = amount.map(name => {
-        console.log(name);
-        const newBox = document.createElement(name);
-        console.log(newBox);
-        // newBox.style.width = (30 + 10).toString() + 'px' ;
-        // newBox.style.height = (30 + 10).toString() + 'px';
-        // newBox.style.backgroundColor = '#' + (Math.random().toString(16) + '000000').substring(2,8).toUpperCase();
-        return newBox;      
-    });
-
+function createBoxesArray(n) {
+   for (let i=0; i < n; i+=1) {
+        const newBox = document.createElement('div');
+        newBox.style.width = (30 + i*10).toString() + 'px' ;
+        newBox.style.height = (30 + i*10).toString() + 'px';
+        newBox.style.backgroundColor = '#' + (Math.random().toString(16) + '000000').substring(2,8).toUpperCase();
+        boxesArray.push(newBox);
+    };
+    return boxesArray;
+}
 
 const createBoxes = () => {
-    // console.log(createBoxesArr);
-    boxesRef.append(...createBoxesArr);
+    boxesRef.append(...createBoxesArray(amount));
 }
 
 const destroyBoxes = () => {
     boxesRef.innerHTML ='<div id="boxes"></div>';
+    boxesArray = [];
 }
-
-
 
 renderBtnRef.addEventListener('click', createBoxes);
 destroyBtnRef.addEventListener('click', destroyBoxes);
